@@ -13,11 +13,11 @@ public class PressureResults {
 	
 	@Id
 	@NotEmpty
-    @Column(name="id", unique=true, nullable=false)
+    @Column(name="id", nullable=false)
     private String id;
 	
 	@NotEmpty
-    @Column(name="pesel", unique=true, nullable=false)
+    @Column(name="pesel", nullable=false)
     private String pesel;
 	
 	@NotEmpty
@@ -44,6 +44,11 @@ public class PressureResults {
 		this.date = date;
 		this.comment = comment;
 	}
+	
+	public PressureResults(){
+		
+	}
+	
 	public String getId() {
         return id;
     }

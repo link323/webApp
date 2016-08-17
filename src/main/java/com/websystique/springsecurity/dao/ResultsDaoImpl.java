@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.websystique.springsecurity.model.DiabeticResults;
+import com.websystique.springsecurity.model.Pacients;
 import com.websystique.springsecurity.model.PressureResults;
 import com.websystique.springsecurity.model.User;
 
@@ -29,6 +30,16 @@ public class ResultsDaoImpl extends AbstractDao<Integer, DiabeticResults> implem
 		Criteria criteria = createCriteria(PressureResults.class);//.addOrder(Order.asc("pesel"));
         //criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
         List<PressureResults> results = (List<PressureResults>) criteria.list();
+
+        return results;
+	}
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<Pacients> findAllPacients(){
+		Criteria criteria = createCriteria(Pacients.class);//.addOrder(Order.asc("pesel"));
+        //criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
+        List<Pacients> results = (List<Pacients>) criteria.list();
 
         return results;
 	}

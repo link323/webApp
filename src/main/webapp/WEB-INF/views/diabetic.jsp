@@ -9,7 +9,7 @@
 			      <li class="home selected"><a class="active" href="<c:url value='/home' />"><span>Home</span></a></li>
 			      <li class="diabetic"><a href="<c:url value='/diabetic' />"><span>diabetic</span></a></li>
 			      <li class="blood pressure"><a href="<c:url value='/pressure' />"><span>pressure</span></a></li>
-			      <li class="contact"><a href="#"><span>Contact</span></a></li>
+			      <li class="calculators"><a href="<c:url value='/calculators' />"><span>calculators</span></a></li>
 		    </ul>
 		</div>
 
@@ -21,6 +21,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	
+	<label for="pacient">Pacjent: </label>
+	<select id="pacjent">
+		<c:forEach items="${pacients}" var="pacients">
+			<option value="${pacients.pesel}">${pacients.pesel}</option>
+		</c:forEach>
+		<input type="submit" value="Submit">
+	</select>
+	
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -28,15 +36,15 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
+          ['date', 'result'],
+          ['2004',  1000],
+          ['2005',  1170],
+          ['2006',  660],
+          ['2007',  1030]     
         ]);
 
         var options = {
-          title: 'Company Performance',
+          title: 'glucose',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -47,52 +55,50 @@
       }
     </script>
     <div id="curve_chart" style="width: 900px; height: 500px"></div>
-	<a href="<c:url value="/home" />"><h3>return to home page</h3></a>
 	
-	<h2>List of results</h2>
+	<h2>List of glucose results</h2>
 	<div  class="tbl-header">
-	<table cellpadding="0" cellspacing="0" border="0">
-		<thead>	
-			<tr>
-				<td> pesel </td><td>	</td><td> result </td><td>	</td><td> date </td><td>	</td><td> before food </td><td>	</td><td> comment </td>
-			</tr>
-		</thead>
-	</table>
-	<div  class="tbl-content">
 		<table cellpadding="0" cellspacing="0" border="0">
-  			<tbody>
-				<c:forEach items="${diabeticResults}" var="result">
-					<c:choose>
-	    				<c:when test="${result.pesel == 90032518908}">
-							<tr>
-								<td>
-						            <c:out value="${result.pesel}"/>
-						        </td>
-						        <td>	</td>
-						        <td>
-						            <c:out value="${result.result}" />
-						        </td>
-						        <td>	</td>
-						        <td>
-						            <c:out value="${result.date}"/>
-						        </td>
-						        <td>	</td>
-						        <td>
-						            <c:out value="${result.beforeFood}" />
-						        </td>
-						        <td>	</td>
-						        <td>
-						            <c:out value="${result.comment}" />
-						        </td>
-							</tr>
-						</c:when>
-					</c:choose>
-				</c:forEach>
-		 </tbody>
-	</table>
-	<div class="made-with-love">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+			<thead>	
+				<tr>
+					<td> pesel </td><td>	</td><td> result </td><td>	</td><td> date </td><td>	</td><td> before food </td><td>	</td><td> comment </td>
+				</tr>
+			</thead>
+		</table>
+		<div  class="tbl-content">
+			<table cellpadding="0" cellspacing="0" border="0">
+	  			<tbody>
+					<c:forEach items="${diabeticResults}" var="result">
+						<c:choose>
+	    					<c:when test="${result.pesel == 90032518908}">
+								<tr>
+									<td>
+							            <c:out value="${result.pesel}"/>
+							        </td>
+							        <td>	</td>
+							        <td>
+							            <c:out value="${result.result}" />
+							        </td>
+							        <td>	</td>
+							        <td>
+							            <c:out value="${result.date}"/>
+							        </td>
+							        <td>	</td>
+							        <td>
+							            <c:out value="${result.beforeFood}" />
+							        </td>
+							        <td>	</td>
+							        <td>
+							            <c:out value="${result.comment}" />
+							        </td>
+								</tr>
+							</c:when>
+						</c:choose>	
+					</c:forEach>
+			 	</tbody>
+			</table>
+		</div>
+	</div>	
 </body>
 
 </html>

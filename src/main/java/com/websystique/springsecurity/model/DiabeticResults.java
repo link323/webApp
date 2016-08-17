@@ -13,11 +13,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class DiabeticResults {
 	@Id
 	@NotEmpty
-    @Column(name="doctor_id", unique=true, nullable=false)
+    @Column(name="doctor_id", nullable=false)
     private String doctorId;
 	
 	@NotEmpty
-    @Column(name="pesel", unique=true, nullable=false)
+    @Column(name="pesel", nullable=false)
     private String pesel;
 
 	@NotEmpty
@@ -43,6 +43,10 @@ public class DiabeticResults {
 		this.date = date;
 		this.beforeFood = beforeFood;
 		this.comment = comment;
+	}
+	
+	public DiabeticResults(){
+		
 	}
 	
 	public String getId() {

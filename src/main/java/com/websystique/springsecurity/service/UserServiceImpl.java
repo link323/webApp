@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.websystique.springsecurity.dao.ResultsDao;
 import com.websystique.springsecurity.dao.UserDao;
 import com.websystique.springsecurity.model.DiabeticResults;
+import com.websystique.springsecurity.model.Pacients;
 import com.websystique.springsecurity.model.PressureResults;
 import com.websystique.springsecurity.model.User;
 
@@ -64,4 +65,8 @@ public class UserServiceImpl implements UserService{
 		 return resultsDao.findAllPressureResults();
 	}
 
+	@Override
+	public List<Pacients> findAllPacients() {
+		return resultsDao.findAllPacients();
+	}
 }

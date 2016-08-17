@@ -9,7 +9,7 @@
 			      <li class="home selected"><a class="active" href="<c:url value='/home' />"><span>pacients in risk</span></a></li>
 			      <li class="diabetic"><a href="<c:url value='/diabetic' />"><span>diabetic</span></a></li>
 			      <li class="blood pressure"><a href="<c:url value='/pressure' />"><span>pressure</span></a></li>
-			      <li class="contact"><a href="#"><span>Contact</span></a></li>
+			      <li class="calculators"><a href="<c:url value='/calculators' />"><span>calculators</span></a></li>
 		    </ul>
 		</div>
 
@@ -52,9 +52,9 @@
 			        </td>
 				</tr>
 				</c:forEach>
-		 </tbody>
-	</table>
-	
+		 	</tbody>
+		</table>
+	</div>	
 	
 	<h2>List of pressure results</h2>
 	<div  class="tbl-header">
@@ -91,7 +91,8 @@
 			        </td>
 				</tr>
 				</c:forEach>
-		 </tbody>
-	</table>
+		 	</tbody>
+		</table>
+	</div>
 </body>
 </html>

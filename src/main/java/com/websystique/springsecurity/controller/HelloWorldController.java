@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.websystique.springsecurity.drools.CheckDiabetesRisk;
 import com.websystique.springsecurity.drools.CheckHypertensionRisk;
 import com.websystique.springsecurity.model.DiabeticResults;
+import com.websystique.springsecurity.model.Pacients;
 import com.websystique.springsecurity.model.PressureResults;
 import com.websystique.springsecurity.model.User;
 import com.websystique.springsecurity.model.UserProfile;
@@ -39,30 +40,12 @@ public class HelloWorldController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String homePage(ModelMap model) {
     	List<User> users = userService.findAllUsers();
-    	int index = 0;
-    	for(User user: users){
-    		System.out.println(users.get(index));
-    		index++;
-    	}
         model.addAttribute("users", users);
         
     	List<DiabeticResults> diabeticResults = userService.findAllDiabeticResults();
-    	index = 0;
-    	for(DiabeticResults result: diabeticResults){
-    		System.out.println(index+ " " + diabeticResults.get(index).getPesel()
-    				+ " " + diabeticResults.get(index).getResult());
-    		index++;
-    	}
         model.addAttribute("diabeticResults", diabeticResults);
         
     	List<PressureResults> pressureResults = userService.findAllPressureResults();
-    	index = 0;
-    	for(PressureResults result: pressureResults){
-    		System.out.println(index+ " " +pressureResults.get(index).getPesel()
-    				+ " " +pressureResults.get(index).getSystolic() 
-    				+ " " +pressureResults.get(index).getDiastolic());
-    		index++;
-    	}
         model.addAttribute("pressureResults", pressureResults);
         
         return "welcome";
@@ -70,17 +53,17 @@ public class HelloWorldController {
     
     @RequestMapping(value = "/diabetic", method = RequestMethod.GET)
     public String diabeticPage(ModelMap model) {
-
-    	int index = 0;
+    	
     	List<DiabeticResults> diabeticResults = userService.findAllDiabeticResults();
-    	index = 0;
-    	for(DiabeticResults result: diabeticResults){
-    		System.out.println(diabeticResults.get(index));
-    		index++;
-    	}
         model.addAttribute("diabeticResults", diabeticResults);
-        CheckDiabetesRisk risk = new CheckDiabetesRisk(diabeticResults, "90032518908");
-        risk.callDrools();
+
+        List<Pacients> pacientsList = userService.findAllPacients();
+        for(Pacients pacient : pacientsList){
+        	System.out.println(pacient.getName() + " " + pacient.getSurname() + " " + pacient.getPesel());
+        }
+        model.addAttribute("pacients", pacientsList);
+//        CheckDiabetesRisk risk = new CheckDiabetesRisk(diabeticResults, "90032518908");
+//        risk.callDrools();
         return "diabetic";
     }
     
@@ -88,15 +71,15 @@ public class HelloWorldController {
     public String pressurePage(ModelMap model) {
 
     	List<PressureResults> pressureResults = userService.findAllPressureResults();
-    	int index = 0;
-    	for(PressureResults result: pressureResults){
-    		System.out.println(index+ " " +pressureResults.get(index).getPesel()
-    				+ " " +pressureResults.get(index).getSystolic() 
-    				+ " " +pressureResults.get(index).getDiastolic());
-    		index++;
-    	}
         model.addAttribute("pressureResults", pressureResults);
-        CheckHypertensionRisk risk = new CheckHypertensionRisk(pressureResults, "");
+        
+        List<Pacients> pacientsList = userService.findAllPacients();
+        for(Pacients pacient : pacientsList){
+        	System.out.println(pacient.getName() + " " + pacient.getSurname() + " " + pacient.getPesel());
+        }
+        model.addAttribute("pacients", pacientsList);
+//        CheckHypertensionRisk risk = new CheckHypertensionRisk(pressureResults, "");
+//        risk.callDrools();
         return "pressure";
     }
  
@@ -181,9 +164,7 @@ public class HelloWorldController {
         }
         return userName;
     }
-     
-     
-     
+
     @ModelAttribute("roles")
     public List<UserProfile> initializeProfiles() {
         return userProfileService.findAll();
@@ -192,9 +173,16 @@ public class HelloWorldController {
     @RequestMapping("/diabetic")
     public String someAction(@ModelAttribute("DiabeticResults") DiabeticResults results, ModelMap model) {
 
-           System.out.println("chosed pesel" + results.getPesel());
+        System.out.println("chosed pesel" + results.getPesel());
 
 
-           return "diabetic";
-       }
+        return "diabetic";
+    }
+    
+    @RequestMapping("/calculators")
+    public String calculatorPage() {
+    	
+    	
+        return "calculators";
+    }
 }
