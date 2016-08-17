@@ -1,6 +1,6 @@
 
 html{
-	background-color:#2F2F2F;
+	background-color:#009999;
 }
 
 body, #mainWrapper {
@@ -9,10 +9,10 @@ body, #mainWrapper {
 	linear,
 	right bottom,
 	right top,
-	color-stop(0, #EDEDED),
-	color-stop(0.08, #EAEAEA),
-	color-stop(1, #2F2F2F),
-	color-stop(1, #AAAAAA)
+	color-stop(0, #ccffff),
+	color-stop(0.08, #33ffff),
+	color-stop(1, #00b3b3),
+	color-stop(1, #006666)
 );
 background-image: -o-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
 background-image: -moz-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
@@ -47,4 +47,39 @@ body, #mainWrapper, .form-control{
 }
 .login-form {
     padding: 10%;
+}
+
+body {
+  padding : 10px ;
+  
+}
+
+#exTab1 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}
+
+#exTab2 h3 {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}
+
+/* remove border radius for the tab */
+
+#exTab1 .nav-pills > li > a {
+  border-radius: 0;
+}
+
+/* change border radius for the tab , apply corners on top*/
+
+#exTab3 .nav-pills > li > a {
+  border-radius: 4px 4px 0 0 ;
+}
+
+#exTab3 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
 }

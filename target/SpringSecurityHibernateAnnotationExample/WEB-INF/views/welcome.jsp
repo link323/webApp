@@ -5,6 +5,11 @@
 	<title>Welcome page</title>
 </head>
 <body>
+ <%
+
+  %>
+  <a href="<c:url value="/ewelina" />"><h3>go to ewelina page</h3></a>
+  <a href="<c:url value="/logout" />">Logout</a>
 	Greeting : ${greeting}
 	This is a welcome page.
 </body>
