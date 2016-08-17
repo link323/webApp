@@ -1,0 +1,32 @@
+package com.websystique.springsecurity.drools;
+global String topicLevel
+
+
+rule "hypertension"
+	when
+		$drools : Blood( skurczowe1 >= 135, rozkurczowe1 >= 85
+					&& skurczowe2 >= 135, rozkurczowe2 >= 85
+					&& skurczowe3 >= 135, rozkurczowe3 >= 85)
+
+	then
+		$drools.display("nadciœnienie");
+		System.out.println("nadciœnienie");
+	end
+	
+	
+rule "diabetic1"
+	when
+		$drools : Glucose( beforeFood == 1 && result1 >= 126 && result2 >= 126)
+	
+	then
+		System.out.println("cukrzyca1");
+	end	
+		
+		
+rule "diabetic2"
+	when
+		$drools : Glucose( beforeFood == 0 && result1 >= 200 && result1 >= 200)
+	
+	then
+		System.out.println("cukrzyca2");
+	end

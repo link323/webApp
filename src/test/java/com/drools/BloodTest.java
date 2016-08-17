@@ -28,28 +28,28 @@ public class BloodTest {
 	
 	@Test
 	public void checkIfDiabetesTestReturnTrueBeforeFood(){
-		Glucose glucose = new Glucose(1, 140, 136);
+		Glucose glucose = new Glucose(1, 140, 1, 136);
 		Drools drools = new Drools(glucose);
 		drools.droolsGlucoseConfirmer();
 	}
 	
 	@Test
 	public void checkIfDiabetesTestReturnTrueAfterFood(){
-		Glucose glucose = new Glucose(0, 215, 200);
+		Glucose glucose = new Glucose(0, 215, 0, 200);
 		Drools drools = new Drools(glucose);
 		drools.droolsGlucoseConfirmer();
 	}
 	
 	@Test
 	public void checkIfDiabetesTestReturnFalseBeforeFood(){
-		Glucose glucose = new Glucose(1, 120, 110);
+		Glucose glucose = new Glucose(1, 120, 1, 110);
 		Drools drools = new Drools(glucose);
 		drools.droolsGlucoseConfirmer();
 	}
 	
 	@Test
 	public void checkIfDiabetesTestReturnFalseAfterFood(){
-		Glucose glucose = new Glucose(0, 170, 150);
+		Glucose glucose = new Glucose(0, 170, 0, 150);
 		Drools drools = new Drools(glucose);
 		drools.droolsGlucoseConfirmer();
 	}

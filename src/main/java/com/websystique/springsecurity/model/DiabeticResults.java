@@ -36,6 +36,15 @@ public class DiabeticResults {
     @Column(name="comment",nullable=false)
     private String comment;
 
+	public DiabeticResults(String doctorId, String pesel, String result, String date, String beforeFood, String comment){
+		this.doctorId = doctorId;
+		this.pesel = pesel;
+		this.result = result;
+		this.date = date;
+		this.beforeFood = beforeFood;
+		this.comment = comment;
+	}
+	
 	public String getId() {
         return doctorId;
     }

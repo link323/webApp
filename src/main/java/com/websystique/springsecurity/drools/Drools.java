@@ -56,8 +56,4 @@ public class Drools {
         }
 		return "kot";
     }
-    
-    public void display(String message){
-    	System.out.println(message);
-    }
 }

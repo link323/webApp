@@ -16,7 +16,7 @@ public class ResultsDaoImpl extends AbstractDao<Integer, DiabeticResults> implem
     @SuppressWarnings("unchecked")
 	@Override
 	public List<DiabeticResults> findAllDiabeticResults(){
-		Criteria criteria = createCriteria(DiabeticResults.class);//.addOrder(Order.asc("pesel"));
+		Criteria criteria = createCriteria(DiabeticResults.class);
         //criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
         List<DiabeticResults> results = (List<DiabeticResults>) criteria.list();
 

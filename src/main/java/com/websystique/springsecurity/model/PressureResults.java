@@ -10,7 +10,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="pressure_results_table")
 public class PressureResults {
+	
 	@Id
+	@NotEmpty
+    @Column(name="id", unique=true, nullable=false)
+    private String id;
+	
 	@NotEmpty
     @Column(name="pesel", unique=true, nullable=false)
     private String pesel;
@@ -31,6 +36,22 @@ public class PressureResults {
     @Column(name="comment",nullable=false)
     private String comment;
 	
+	public PressureResults(String id, String pesel, String systolic, String diastolic, String date, String comment){
+		this.id = id;
+		this.pesel = pesel;
+		this.systolic = systolic;
+		this.diastolic = diastolic;
+		this.date = date;
+		this.comment = comment;
+	}
+	public String getId() {
+        return id;
+    }
+ 
+    public void setId(String id) {
+        this.id = id;
+    }
+    
 	public String getPesel() {
         return pesel;
     }

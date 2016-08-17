@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.websystique.springsecurity.drools.CheckDiabetesRisk;
+import com.websystique.springsecurity.drools.CheckHypertensionRisk;
 import com.websystique.springsecurity.model.DiabeticResults;
 import com.websystique.springsecurity.model.PressureResults;
 import com.websystique.springsecurity.model.User;
@@ -47,7 +49,8 @@ public class HelloWorldController {
     	List<DiabeticResults> diabeticResults = userService.findAllDiabeticResults();
     	index = 0;
     	for(DiabeticResults result: diabeticResults){
-    		System.out.println(diabeticResults.get(index));
+    		System.out.println(index+ " " + diabeticResults.get(index).getPesel()
+    				+ " " + diabeticResults.get(index).getResult());
     		index++;
     	}
         model.addAttribute("diabeticResults", diabeticResults);
@@ -55,10 +58,13 @@ public class HelloWorldController {
     	List<PressureResults> pressureResults = userService.findAllPressureResults();
     	index = 0;
     	for(PressureResults result: pressureResults){
-    		System.out.println(pressureResults.get(index));
+    		System.out.println(index+ " " +pressureResults.get(index).getPesel()
+    				+ " " +pressureResults.get(index).getSystolic() 
+    				+ " " +pressureResults.get(index).getDiastolic());
     		index++;
     	}
         model.addAttribute("pressureResults", pressureResults);
+        
         return "welcome";
     }
     
@@ -73,22 +79,24 @@ public class HelloWorldController {
     		index++;
     	}
         model.addAttribute("diabeticResults", diabeticResults);
-
+        CheckDiabetesRisk risk = new CheckDiabetesRisk(diabeticResults, "90032518908");
+        risk.callDrools();
         return "diabetic";
     }
     
     @RequestMapping(value = "/pressure", method = RequestMethod.GET)
     public String pressurePage(ModelMap model) {
 
-    	int index = 0;
     	List<PressureResults> pressureResults = userService.findAllPressureResults();
-    	index = 0;
+    	int index = 0;
     	for(PressureResults result: pressureResults){
-    		System.out.println(pressureResults.get(index));
+    		System.out.println(index+ " " +pressureResults.get(index).getPesel()
+    				+ " " +pressureResults.get(index).getSystolic() 
+    				+ " " +pressureResults.get(index).getDiastolic());
     		index++;
     	}
         model.addAttribute("pressureResults", pressureResults);
-
+        CheckHypertensionRisk risk = new CheckHypertensionRisk(pressureResults, "");
         return "pressure";
     }
  
@@ -161,10 +169,7 @@ public class HelloWorldController {
         model.addAttribute("success", "User " + user.getFirstName() + " has been registered successfully");
         return "registrationsuccess";
     }
- 
-     
-     
-     
+  
     private String getPrincipal(){
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -183,5 +188,13 @@ public class HelloWorldController {
     public List<UserProfile> initializeProfiles() {
         return userProfileService.findAll();
     }
- 
+    
+    @RequestMapping("/diabetic")
+    public String someAction(@ModelAttribute("DiabeticResults") DiabeticResults results, ModelMap model) {
+
+           System.out.println("chosed pesel" + results.getPesel());
+
+
+           return "diabetic";
+       }
 }

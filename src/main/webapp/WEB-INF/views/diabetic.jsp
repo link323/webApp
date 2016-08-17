@@ -62,27 +62,31 @@
 		<table cellpadding="0" cellspacing="0" border="0">
   			<tbody>
 				<c:forEach items="${diabeticResults}" var="result">
-				<tr>
-					<td>
-			            <c:out value="${result.pesel}"/>
-			        </td>
-			        <td>	</td>
-			        <td>
-			            <c:out value="${result.result}" />
-			        </td>
-			        <td>	</td>
-			        <td>
-			            <c:out value="${result.date}"/>
-			        </td>
-			        <td>	</td>
-			        <td>
-			            <c:out value="${result.beforeFood}" />
-			        </td>
-			        <td>	</td>
-			        <td>
-			            <c:out value="${result.comment}" />
-			        </td>
-				</tr>
+					<c:choose>
+	    				<c:when test="${result.pesel == 90032518908}">
+							<tr>
+								<td>
+						            <c:out value="${result.pesel}"/>
+						        </td>
+						        <td>	</td>
+						        <td>
+						            <c:out value="${result.result}" />
+						        </td>
+						        <td>	</td>
+						        <td>
+						            <c:out value="${result.date}"/>
+						        </td>
+						        <td>	</td>
+						        <td>
+						            <c:out value="${result.beforeFood}" />
+						        </td>
+						        <td>	</td>
+						        <td>
+						            <c:out value="${result.comment}" />
+						        </td>
+							</tr>
+						</c:when>
+					</c:choose>
 				</c:forEach>
 		 </tbody>
 	</table>
