@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.medapp.calculations.BMITask;
 import com.websystique.springsecurity.drools.CheckDiabetesRisk;
 import com.websystique.springsecurity.drools.CheckHypertensionRisk;
+import com.websystique.springsecurity.model.BMI;
 import com.websystique.springsecurity.model.DiabeticResults;
 import com.websystique.springsecurity.model.Pacients;
 import com.websystique.springsecurity.model.PressureResults;
@@ -152,6 +154,26 @@ public class HelloWorldController {
         model.addAttribute("success", "User " + user.getFirstName() + " has been registered successfully");
         return "registrationsuccess";
     }
+    
+    @RequestMapping(value = "/calculators", method = RequestMethod.GET)
+    public String newCalculation(ModelMap model) {
+        BMI bmi = new BMI();
+        model.addAttribute("bmi", bmi);
+        return "calculators";
+    }
+    
+    @RequestMapping(value = "/calculators", method = RequestMethod.POST)
+    public String calculatorPage(@ModelAttribute("bmi") BMI bmi,
+            ModelMap model) {
+
+    	System.out.println("wzrost : " + bmi.getHeight());
+        System.out.println("waga : " + bmi.getWeight());
+        
+        String countedBmi = new BMITask(bmi).count(); 
+        model.addAttribute("result", countedBmi);
+        System.out.println(countedBmi);
+        return "calculators";
+    }
   
     private String getPrincipal(){
         String userName = null;
@@ -179,10 +201,13 @@ public class HelloWorldController {
         return "diabetic";
     }
     
-    @RequestMapping("/calculators")
-    public String calculatorPage() {
-    	
-    	
-        return "calculators";
-    }
+//    @RequestMapping("/calculators")
+//    public String calculatorPage(@Valid HttpServletRequest request,
+//            ModelMap model) {
+//    	
+//    	String wt=request.getParameter("weight");
+//    	String ht=request.getParameter("height");
+//    	System.out.println(wt + " " + ht);
+//        return "calculators";
+//    }
 }
