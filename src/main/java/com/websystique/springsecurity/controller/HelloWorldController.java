@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.medapp.calculations.BMITask;
+import com.medapp.calculations.CholesterolTasks;
 import com.websystique.springsecurity.drools.CheckDiabetesRisk;
 import com.websystique.springsecurity.drools.CheckHypertensionRisk;
 import com.websystique.springsecurity.model.BMI;
+import com.websystique.springsecurity.model.Cholesterol;
 import com.websystique.springsecurity.model.DiabeticResults;
 import com.websystique.springsecurity.model.Pacients;
 import com.websystique.springsecurity.model.PressureResults;
@@ -159,19 +161,28 @@ public class HelloWorldController {
     public String newCalculation(ModelMap model) {
         BMI bmi = new BMI();
         model.addAttribute("bmi", bmi);
+        
+        Cholesterol cholesterol = new Cholesterol();
+        model.addAttribute("cholesterol", cholesterol);
         return "calculators";
     }
     
     @RequestMapping(value = "/calculators", method = RequestMethod.POST)
-    public String calculatorPage(@ModelAttribute("bmi") BMI bmi,
+    public String calculatorPage(@ModelAttribute("bmi") BMI bmi, 
+    		@ModelAttribute("cholesterol") Cholesterol cholesterol,
             ModelMap model) {
-
-    	System.out.println("wzrost : " + bmi.getHeight());
-        System.out.println("waga : " + bmi.getWeight());
         
         String countedBmi = new BMITask(bmi).count(); 
         model.addAttribute("result", countedBmi);
         System.out.println(countedBmi);
+        CholesterolTasks task = new CholesterolTasks(cholesterol);
+        String checkedTotalCholesterol = task.checkTotal();
+        String checkedHDLCholesterolMan = task.checkHDLMan();
+//        String checkedHDLCholesterolWoman = new CholesterolTasks(cholesterol).checkHDLWoman();
+        String checkedLDLCholesterol = task.checkLDL();
+        model.addAttribute("total", checkedTotalCholesterol);
+        model.addAttribute("hdl", checkedHDLCholesterolMan);
+        model.addAttribute("ldl", checkedLDLCholesterol);
         return "calculators";
     }
   

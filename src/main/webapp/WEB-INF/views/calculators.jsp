@@ -37,5 +37,43 @@
 		        </div>
 		    </form:form>
 	    </div>
+	    
+		    <h1>Wylicz cholesterol całkowity</h1>
+		    <form:form method="POST" modelAttribute="cholesterol" class="form-horizontal">
+		        <div class="row">
+		            <div class="form-group col-md-12">
+		                <label class="col-md-3 control-lable" for="total">cholesterol [mg/dl]</label>
+		                <div class="col-md-7">
+		                    <form:input type="number" step="any" path="total" id="total" required = "true"/>
+		                </div>
+		            </div>
+		        </div>
+		
+		    	<h1>Wylicz cholesterol HDL</h1>
+		        <div class="row">
+		            <div class="form-group col-md-12">
+		                <label class="col-md-3 control-lable" for="hdl">cholesterol [mg/dl]</label>
+		                <div class="col-md-7">
+		                    <form:input type="number" step="any" path="hdl" id="hdl" required = "true"/>
+		                </div>
+		            </div>
+		        </div>
+		
+		    	<h1>Wylicz cholesterol LDL</h1>
+		        <div class="row">
+		            <div class="form-group col-md-12">
+		                <label class="col-md-3 control-lable" for="ldl">cholesterol [mg/dl]</label>
+		                <div class="col-md-7">
+		                    <form:input type="number" step="any" path="ldl" id="ldl" required = "true"/>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="form-actions floatRight">
+		                <input type="submit" value="count">
+		            </div>
+		        </div>
+		    </form:form>
+		</div>
 	</body>
 </html>
