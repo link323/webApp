@@ -1,7 +1,10 @@
 package com.websystique.springsecurity.controller;
  
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
- 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -51,7 +54,9 @@ public class HelloWorldController {
         
     	List<PressureResults> pressureResults = userService.findAllPressureResults();
         model.addAttribute("pressureResults", pressureResults);
-        
+//        for(){
+//        	
+//        }
         return "welcome";
     }
     
@@ -60,15 +65,30 @@ public class HelloWorldController {
     	
     	List<DiabeticResults> diabeticResults = userService.findAllDiabeticResults();
         model.addAttribute("diabeticResults", diabeticResults);
-
-        List<Pacients> pacientsList = userService.findAllPacients();
-        for(Pacients pacient : pacientsList){
-        	System.out.println(pacient.getName() + " " + pacient.getSurname() + " " + pacient.getPesel());
-        }
-        model.addAttribute("pacients", pacientsList);
-//        CheckDiabetesRisk risk = new CheckDiabetesRisk(diabeticResults, "90032518908");
-//        risk.callDrools();
+//
+//        List<Pacients> pacientsList = new ArrayList<>();
+//        model.addAttribute("pacients", pacientsList);
+//        
+        Pacients chosenPacient = new Pacients();
+        model.addAttribute("chosenPacient", chosenPacient);
         return "diabetic";
+    }
+    
+    @RequestMapping(value = "/diabetic", method = RequestMethod.POST)
+    public String diabeticPage(@ModelAttribute("chosenPacient") Pacients chosenPacient,
+            ModelMap model) {
+    	
+      List<Pacients> allPacientsList = userService.findAllPacients();
+      List<Pacients> pacientsList = new ArrayList<>();
+      List<DiabeticResults> diabeticResults = userService.findAllDiabeticResults();
+      List<DiabeticResults> onePacientDiabeticResults = new ArrayList<>();
+      for(DiabeticResults result : diabeticResults){
+    	  if(result.getPesel().equals(chosenPacient.getPesel())){
+    		  onePacientDiabeticResults.add(result);
+    	  }
+      }
+      model.addAttribute("diabeticResults", onePacientDiabeticResults);
+      return "diabetic";
     }
     
     @RequestMapping(value = "/pressure", method = RequestMethod.GET)
@@ -77,16 +97,34 @@ public class HelloWorldController {
     	List<PressureResults> pressureResults = userService.findAllPressureResults();
         model.addAttribute("pressureResults", pressureResults);
         
-        List<Pacients> pacientsList = userService.findAllPacients();
-        for(Pacients pacient : pacientsList){
-        	System.out.println(pacient.getName() + " " + pacient.getSurname() + " " + pacient.getPesel());
-        }
-        model.addAttribute("pacients", pacientsList);
+        Pacients chosenPacient = new Pacients();
+        model.addAttribute("chosenPacient", chosenPacient);
+//        List<Pacients> pacientsList = userService.findAllPacients();
+//        for(Pacients pacient : pacientsList){
+//        	System.out.println(pacient.getName() + " " + pacient.getSurname() + " " + pacient.getPesel());
+//        }
+//        model.addAttribute("pacients", pacientsList);
 //        CheckHypertensionRisk risk = new CheckHypertensionRisk(pressureResults, "");
 //        risk.callDrools();
         return "pressure";
     }
  
+    @RequestMapping(value = "/pressure", method = RequestMethod.POST)
+    public String pressurePage(@ModelAttribute("chosenPacient") Pacients chosenPacient,
+            ModelMap model) {
+    	
+      List<Pacients> allPacientsList = userService.findAllPacients();
+      List<PressureResults> pressureResults = userService.findAllPressureResults();
+      List<PressureResults> onePacientPressureResults = new ArrayList<>();
+      for(PressureResults result : pressureResults){
+    	  if(result.getPesel().equals(chosenPacient.getPesel())){
+    		  onePacientPressureResults.add(result);
+    	  }
+      }
+      model.addAttribute("pressureResults", onePacientPressureResults);
+      return "pressure";
+    }
+    
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
@@ -159,22 +197,40 @@ public class HelloWorldController {
     
     @RequestMapping(value = "/calculators", method = RequestMethod.GET)
     public String newCalculation(ModelMap model) {
-        BMI bmi = new BMI();
-        model.addAttribute("bmi", bmi);
-        
-        Cholesterol cholesterol = new Cholesterol();
-        model.addAttribute("cholesterol", cholesterol);
         return "calculators";
     }
     
-    @RequestMapping(value = "/calculators", method = RequestMethod.POST)
-    public String calculatorPage(@ModelAttribute("bmi") BMI bmi, 
-    		@ModelAttribute("cholesterol") Cholesterol cholesterol,
+    @RequestMapping(value = "/bmiform", method = RequestMethod.GET)
+    public String bmiForm(ModelMap model) {
+        BMI bmi = new BMI();
+        model.addAttribute("bmi", bmi);
+
+        return "bmiform";
+    }
+    
+    @RequestMapping(value = "/bmiform", method = RequestMethod.POST)
+    public String bmiForm(@ModelAttribute("bmi") BMI bmi,
             ModelMap model) {
         
         String countedBmi = new BMITask(bmi).count(); 
         model.addAttribute("result", countedBmi);
         System.out.println(countedBmi);
+        
+        return "bmiform";
+    }
+  
+    @RequestMapping(value = "/cholesterolform", method = RequestMethod.GET)
+    public String cholesterolForm(ModelMap model) {
+
+    	Cholesterol cholesterol = new Cholesterol();
+        model.addAttribute("cholesterol", cholesterol);
+        return "cholesterolform";
+    }
+    
+    @RequestMapping(value = "/cholesterolform", method = RequestMethod.POST)
+    public String cholesterolForm(@ModelAttribute("cholesterol") Cholesterol cholesterol,
+            ModelMap model) {
+        
         CholesterolTasks task = new CholesterolTasks(cholesterol);
         String checkedTotalCholesterol = task.checkTotal();
         String checkedHDLCholesterolMan = task.checkHDLMan();
@@ -183,9 +239,8 @@ public class HelloWorldController {
         model.addAttribute("total", checkedTotalCholesterol);
         model.addAttribute("hdl", checkedHDLCholesterolMan);
         model.addAttribute("ldl", checkedLDLCholesterol);
-        return "calculators";
+        return "cholesterolform";
     }
-  
     private String getPrincipal(){
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -211,14 +266,4 @@ public class HelloWorldController {
 
         return "diabetic";
     }
-    
-//    @RequestMapping("/calculators")
-//    public String calculatorPage(@Valid HttpServletRequest request,
-//            ModelMap model) {
-//    	
-//    	String wt=request.getParameter("weight");
-//    	String ht=request.getParameter("height");
-//    	System.out.println(wt + " " + ht);
-//        return "calculators";
-//    }
 }

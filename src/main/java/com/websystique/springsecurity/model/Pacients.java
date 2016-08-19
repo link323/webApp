@@ -45,4 +45,16 @@ public class Pacients {
 	public String getSurname(){
 		return surname;
 	}
+	
+	public void setPesel(String pesel){
+		this.pesel = pesel;
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public void setSurname(String surname){
+		this.surname = surname;
+	}
 }

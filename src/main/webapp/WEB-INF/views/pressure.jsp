@@ -17,18 +17,28 @@
 </head>
 
 <body>
-	<div class="made-with-love">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	
-	<label for="pacient">Pacjent: </label>
-	<select id="pacjent">
-		<c:forEach items="${pacients}" var="pacients">
-			<option value="${pacients.pesel}">${pacients.pesel}</option>
-		</c:forEach>
-		<input type="submit" value="Submit">
-	</select>
-	
+		<div>
+			<h1>Type pacient's PESEL</h1>
+		    <form:form method="POST" modelAttribute="chosenPacient" class="form-horizontal">
+		    	<h2>total</h2>
+		        <div class="row">
+		            <div class="form-group col-md-12">
+		                <label class="col-md-3 control-lable" for="total">PESEL</label>
+		                <div class="col-md-7">
+		                    <form:input type="number" step="any" path="pesel" id="pesel" required = "true"/>
+		                </div>
+		            </div>
+		        </div>
+		
+
+				<div class="row">
+		            <div class="form-actions floatRight">
+		                <input type="submit" value="count" class="btn btn-primary btn-sm">
+		            </div>
+		        </div>
+		    </form:form>
+		</div>
+    <!--
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -55,7 +65,7 @@
       }
     </script>
     <div id="curve_chart" style="width: 900px; height: 500px"></div>
-	
+	-->
 	<h2>List of pressure results</h2>
 	<div  class="tbl-header">
 		<table cellpadding="0" cellspacing="0" border="0">
@@ -70,7 +80,7 @@
 	  			<tbody>
 					<c:forEach items="${pressureResults}" var="pressureResult">
 						<c:choose>
-		    				<c:when test="${result.pesel == 90032518908}">
+		    				<c:when test="${result.pesel}">
 								<tr>
 									<td>
 							            <c:out value="${pressureResult.pesel}"/>

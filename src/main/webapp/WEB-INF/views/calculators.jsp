@@ -4,76 +4,29 @@
  
 <html>
 	<head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	    <title>calculate something</title>
+		<div id="exTab1" class="container">	
+			<ul  class="nav nav-pills">
+		    	<h1><a href="#"><span>MedApp</span></a></h1>
+			      <li class="home selected"><a class="active" href="<c:url value='/home' />"><span>pacients in risk</span></a></li>
+			      <li class="diabetic"><a href="<c:url value='/diabetic' />"><span>diabetic</span></a></li>
+			      <li class="blood pressure"><a href="<c:url value='/pressure' />"><span>pressure</span></a></li>
+			      <li class="calculators"><a href="<c:url value='/calculators' />"><span>calculators</span></a></li>
+		    </ul>
+		</div>
 	    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
 	    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 	</head>
 	<body>
 	 
 	    <div class="form-container">
-		    <h1>Calculate BMI</h1>
-		    <form:form method="POST" modelAttribute="bmi" class="form-horizontal">
-		        <div class="row">
-		            <div class="form-group col-md-12">
-		                <label class="col-md-3 control-lable" for="weight">weight [kg]</label>
-		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="weight" id="weight"/>
-		                </div>
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="form-group col-md-12">
-		                <label class="col-md-3 control-lable" for="height">height [cm]</label>
-		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="height" id="height"/>
-		                </div>
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="form-actions floatRight">
-		                <input type="submit" value="count">
-		            </div>
-		        </div>
-		    </form:form>
-	    </div>
-	    
-		    <h1>Wylicz cholesterol całkowity</h1>
-		    <form:form method="POST" modelAttribute="cholesterol" class="form-horizontal">
-		        <div class="row">
-		            <div class="form-group col-md-12">
-		                <label class="col-md-3 control-lable" for="total">cholesterol [mg/dl]</label>
-		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="total" id="total" required = "true"/>
-		                </div>
-		            </div>
-		        </div>
-		
-		    	<h1>Wylicz cholesterol HDL</h1>
-		        <div class="row">
-		            <div class="form-group col-md-12">
-		                <label class="col-md-3 control-lable" for="hdl">cholesterol [mg/dl]</label>
-		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="hdl" id="hdl" required = "true"/>
-		                </div>
-		            </div>
-		        </div>
-		
-		    	<h1>Wylicz cholesterol LDL</h1>
-		        <div class="row">
-		            <div class="form-group col-md-12">
-		                <label class="col-md-3 control-lable" for="ldl">cholesterol [mg/dl]</label>
-		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="ldl" id="ldl" required = "true"/>
-		                </div>
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="form-actions floatRight">
-		                <input type="submit" value="count">
-		            </div>
-		        </div>
-		    </form:form>
+	    	<div class="form-actions floatRight">
+				<form action="<c:url value='/bmiform' />">
+	    			<input type="submit" value="Count BMI" class="btn btn-primary btn-sm"/>
+				</form>
+				<form action="<c:url value='/cholesterolform' />">
+	    			<input type="submit" value="Check what cholesterol value means" class="btn btn-primary btn-sm"/>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

@@ -16,17 +16,12 @@ rule "hypertension"
 	
 rule "diabetic1"
 	when
-		$drools : Glucose( beforeFood == 1 && result1 >= 126 && result2 >= 126)
+		$drools : Glucose( ((beforeFood1 == 1 && result1 >= 126) 
+					|| (beforeFood1 == 0 && result1 >= 200)) 
+					&& ((beforeFood2 == 1 && result2 >= 126) 
+					|| (beforeFood2 == 0 && result2 >= 200)))
 	
 	then
-		System.out.println("cukrzyca1");
+		System.out.println("cukrzyca");
 	end	
 		
-		
-rule "diabetic2"
-	when
-		$drools : Glucose( beforeFood == 0 && result1 >= 200 && result1 >= 200)
-	
-	then
-		System.out.println("cukrzyca2");
-	end
