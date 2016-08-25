@@ -3,17 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <div class="container"><h1></h1></div>
-		<div id="exTab1" class="container">	
-			<ul  class="nav nav-pills">
-		    	<h1><a href="#"><span>MedApp</span></a></h1>
-			      <li class="home selected"><a class="active" href="<c:url value='/home' />"><span>Home</span></a></li>
-			      <li class="diabetic"><a href="<c:url value='/diabetic' />"><span>diabetic</span></a></li>
-			      <li class="blood pressure"><a href="<c:url value='/pressure' />"><span>pressure</span></a></li>
-			      <li class="calculators"><a href="<c:url value='/calculators' />"><span>calculators</span></a></li>
-		    </ul>
-		</div>
-
+	<div id="exTab1" class="container">	
+		<ul  class="nav nav-pills">
+		    <h1><a href="#"><span>MedApp</span></a></h1>
+			<li class="home selected"><a class="active" href="<c:url value='/home' />"><span>Home</span></a></li>
+			<li class="diabetic"><a href="<c:url value='/diabetic' />"><span>diabetic</span></a></li>
+			<li class="blood pressure"><a href="<c:url value='/pressure' />"><span>pressure</span></a></li>
+			<li class="calculators"><a href="<c:url value='/calculators' />"><span>calculators</span></a></li>
+		</ul>
+	</div>
     <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 </head>
@@ -77,36 +75,36 @@
 				</tr>
 			</thead>
 		</table>
-		</div>		
+	</div>		
 		<div  class="tbl-content">
 			<table cellpadding="0" cellspacing="0" border="0">
 	  			<tbody>
 					<c:forEach items="${diabeticResults}" var="result">
-								<tr>
-									<td>
-							            <c:out value="${result.pesel}"/>
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${result.result}" />
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${result.date}"/>
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${result.beforeFood}" />
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${result.comment}" />
-							        </td>
-								</tr>
+						<tr>
+							<td>
+								<c:out value="${result.pesel}"/>
+							</td>
+							<td>	</td>
+							<td>
+							    <c:out value="${result.result}" />
+							</td>
+							<td>	</td>
+							<td>
+							    <c:out value="${result.date}"/>
+							</td>
+							<td>	</td>
+							<td>
+							    <c:out value="${result.beforeFood}" />
+							</td>
+							<td>	</td>
+							<td>
+							    <c:out value="${result.comment}" />
+							</td>
+						</tr>
 					</c:forEach>
 			 	</tbody>
 			</table>
 		</div>
-</body>
+	</body>
 
 </html>

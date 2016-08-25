@@ -1,6 +1,6 @@
-<%@page import="com.websystique.springsecurity.model.PressureResults"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 	<div id="exTab1" class="container">	
@@ -15,9 +15,8 @@
     <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 </head>
-
 <body>
-		<div>
+	<div>
 			<h1>Type pacient's PESEL</h1>
 		    <form:form method="POST" modelAttribute="chosenPacient" class="form-horizontal">
 		    	<h2>total</h2>
@@ -37,7 +36,7 @@
 		            </div>
 		        </div>
 		    </form:form>
-		</div>
+	</div>
     <!--
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -68,47 +67,42 @@
 	-->
 	<h2>List of pressure results</h2>
 	<div  class="tbl-header">
-		<table cellpadding="0" cellspacing="0" border="0">
-			<thead>	
-				<tr>
-					<td> pesel </td><td>	</td><td> systolic </td><td>	</td><td> diastolic </td><td>	</td><td> date </td><td>	</td><td> comment </td>
-				</tr>
-			</thead>
-		</table>
-		<div  class="tbl-content">
-			<table cellpadding="0" cellspacing="0" border="0">
-	  			<tbody>
-					<c:forEach items="${pressureResults}" var="pressureResult">
-						<c:choose>
-		    				<c:when test="${result.pesel}">
-								<tr>
-									<td>
-							            <c:out value="${pressureResult.pesel}"/>
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${pressureResult.systolic}" />
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${pressureResult.diastolic}"/>
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${pressureResult.date}" />
-							        </td>
-							        <td>	</td>
-							        <td>
-							            <c:out value="${pressureResult.comment}" />
-							        </td>
-								</tr>
-							</c:when>
-						</c:choose>	
-					</c:forEach>
-			 	</tbody>
-			</table>
-		</div>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<thead>	
+			<tr>
+				<td> pesel </td><td>	</td><td> systolic </td><td>	</td><td> diastolic </td><td>	</td><td> date </td><td>	</td><td> comment </td>
+			</tr>
+		</thead>
+	</table>
 	</div>
-</body>
-
+	<div  class="tbl-content">
+		<table cellpadding="0" cellspacing="0" border="0">
+  			<tbody>
+				<c:forEach items="${pressureResults}" var="pressureResult">
+				<tr>
+					<td>
+			            <c:out value="${pressureResult.pesel}"/>
+			        </td>
+			        <td>	</td>
+			        <td>
+			            <c:out value="${pressureResult.systolic}" />
+			        </td>
+			        <td>	</td>
+			        <td>
+			            <c:out value="${pressureResult.diastolic}"/>
+			        </td>
+			        <td>	</td>
+			        <td>
+			            <c:out value="${pressureResult.date}" />
+			        </td>
+			        <td>	</td>
+			        <td>
+			            <c:out value="${pressureResult.comment}" />
+			        </td>
+				</tr>
+				</c:forEach>
+		 	</tbody>
+		</table>
+	</div>
+	</body>
 </html>

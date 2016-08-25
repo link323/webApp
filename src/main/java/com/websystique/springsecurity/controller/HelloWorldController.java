@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.medapp.calculations.BMITask;
 import com.medapp.calculations.CholesterolTasks;
+import com.medapp.calculations.Maximum;
+import com.medapp.calculations.Mean;
+import com.medapp.calculations.Median;
+import com.medapp.calculations.Minimum;
 import com.websystique.springsecurity.drools.CheckDiabetesRisk;
 import com.websystique.springsecurity.drools.CheckHypertensionRisk;
 import com.websystique.springsecurity.model.BMI;
@@ -64,13 +68,11 @@ public class HelloWorldController {
     public String diabeticPage(ModelMap model) {
     	
     	List<DiabeticResults> diabeticResults = userService.findAllDiabeticResults();
-        model.addAttribute("diabeticResults", diabeticResults);
-//
-//        List<Pacients> pacientsList = new ArrayList<>();
-//        model.addAttribute("pacients", pacientsList);
-//        
+        model.addAttribute("diabeticResults", diabeticResults);    
+        
         Pacients chosenPacient = new Pacients();
         model.addAttribute("chosenPacient", chosenPacient);
+        
         return "diabetic";
     }
     
@@ -87,6 +89,17 @@ public class HelloWorldController {
     		  onePacientDiabeticResults.add(result);
     	  }
       }
+      Minimum min = new Minimum();
+      String minResult = min.countMinOfDiabetic(onePacientDiabeticResults);
+      Maximum max = new Maximum();
+      String maxResult = max.countMaxOfDiabetic(onePacientDiabeticResults);
+      Mean mean = new Mean();
+      String meanResult = mean.countMeanOfDiabetic(onePacientDiabeticResults);
+      Median median = new Median();
+      String medianResult = median.countMedianOfDiabebetic(onePacientDiabeticResults);
+      System.out.println("min: " + minResult + ", max: " + maxResult + ", mean: " 
+    		  + meanResult + ", median: " + medianResult);
+      
       model.addAttribute("diabeticResults", onePacientDiabeticResults);
       return "diabetic";
     }
@@ -99,13 +112,7 @@ public class HelloWorldController {
         
         Pacients chosenPacient = new Pacients();
         model.addAttribute("chosenPacient", chosenPacient);
-//        List<Pacients> pacientsList = userService.findAllPacients();
-//        for(Pacients pacient : pacientsList){
-//        	System.out.println(pacient.getName() + " " + pacient.getSurname() + " " + pacient.getPesel());
-//        }
-//        model.addAttribute("pacients", pacientsList);
-//        CheckHypertensionRisk risk = new CheckHypertensionRisk(pressureResults, "");
-//        risk.callDrools();
+
         return "pressure";
     }
  
@@ -121,7 +128,20 @@ public class HelloWorldController {
     		  onePacientPressureResults.add(result);
     	  }
       }
+      
+      Minimum min = new Minimum();
+      String minResult = min.countMinOfPressure(onePacientPressureResults);
+      Maximum max = new Maximum();
+      String maxResult = max.countMaxOfPressure(onePacientPressureResults);
+      Mean mean = new Mean();
+      String meanResult = mean.countMeanOfPressure(onePacientPressureResults);
+      Median median = new Median();
+      String medianResult = median.countMedianOfPressure(onePacientPressureResults);
+      System.out.println("min: " + minResult + ", max: " + maxResult + ", mean: " 
+    		  + meanResult + ", median: " + medianResult);
+      
       model.addAttribute("pressureResults", onePacientPressureResults);
+      
       return "pressure";
     }
     
