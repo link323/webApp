@@ -101,6 +101,11 @@ public class HelloWorldController {
     		  + meanResult + ", median: " + medianResult);
       
       model.addAttribute("diabeticResults", onePacientDiabeticResults);
+      model.addAttribute("min", minResult);
+      model.addAttribute("max", maxResult);
+      model.addAttribute("mean", meanResult);
+      model.addAttribute("median", medianResult);
+      
       return "diabetic";
     }
     
@@ -141,6 +146,10 @@ public class HelloWorldController {
     		  + meanResult + ", median: " + medianResult);
       
       model.addAttribute("pressureResults", onePacientPressureResults);
+      model.addAttribute("min", minResult);
+      model.addAttribute("max", maxResult);
+      model.addAttribute("mean", meanResult);
+      model.addAttribute("median", medianResult);
       
       return "pressure";
     }
