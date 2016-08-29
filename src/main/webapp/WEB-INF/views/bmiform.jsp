@@ -31,7 +31,7 @@
 		        </div>
 		        
 		        <div class="row">
-		            <div class="form-actions floatRight">
+		            <div class="form-actions">
 		                <input type="submit" value="count" class="btn btn-primary btn-sm">
 		            </div>
 		        </div>
@@ -54,9 +54,3 @@
 		</div>
 	</body>
 </html>
-
-<!-- <div class="form-container">
-	    	<div class="form-actions floatRight">
-				<form action="<c:url value='/bmiform' />">
-	    			<input type="submit" value="Count BMI" class="btn btn-primary btn-sm"/>
-				</form>-->

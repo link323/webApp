@@ -18,7 +18,7 @@
 		            <div class="form-group col-md-12">
 		                <label class="col-md-3 control-lable" for="total">cholesterol [mg/dl]</label>
 		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="total" id="total" required = "true"/>
+		                    <form:input type="number" step="any" path="total" id="total" />
 		                </div>
 		            </div>
 		        </div>
@@ -28,7 +28,7 @@
 		            <div class="form-group col-md-12">
 		                <label class="col-md-3 control-lable" for="hdl">cholesterol [mg/dl]</label>
 		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="hdl" id="hdl" required = "true"/>
+		                    <form:input type="number" step="any" path="hdl" id="hdl"/>
 		                </div>
 		            </div>
 		        </div>
@@ -38,12 +38,22 @@
 		            <div class="form-group col-md-12">
 		                <label class="col-md-3 control-lable" for="ldl">cholesterol [mg/dl]</label>
 		                <div class="col-md-7">
-		                    <form:input type="number" step="any" path="ldl" id="ldl" required = "true"/>
+		                    <form:input type="number" step="any" path="ldl" id="ldl"/>
 		                </div>
 		            </div>
 		        </div>
+		        
+		        <table>
+					<tr>
+						<td>Gender:</td>
+						<td>
+		                	<form:checkbox path="male" value="Male" />Male
+		                </td>
+					</tr>
+				</table>
+				
 				<div class="row">
-		            <div class="form-actions floatRight">
+		            <div class="form-actions">
 		                <input type="submit" value="count" class="btn btn-primary btn-sm">
 		            </div>
 		        </div>

@@ -13,8 +13,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class DiabeticResults {
 	@Id
 	@NotEmpty
-    @Column(name="doctor_id", nullable=false)
-    private String doctorId;
+    @Column(name="id", nullable=false)
+    private String id;
 	
 	@NotEmpty
     @Column(name="pesel", nullable=false)
@@ -36,8 +36,8 @@ public class DiabeticResults {
     @Column(name="comment",nullable=false)
     private String comment;
 
-	public DiabeticResults(String doctorId, String pesel, String result, String date, String beforeFood, String comment){
-		this.doctorId = doctorId;
+	public DiabeticResults(String id, String pesel, String result, String date, String beforeFood, String comment){
+		this.id = id;
 		this.pesel = pesel;
 		this.result = result;
 		this.date = date;
@@ -50,11 +50,11 @@ public class DiabeticResults {
 	}
 	
 	public String getId() {
-        return doctorId;
+        return id;
     }
  
-    public void setId(String doctorId) {
-        this.doctorId = doctorId;
+    public void setId(String id) {
+        this.id = id;
     }
 	public String getPesel() {
         return pesel;
