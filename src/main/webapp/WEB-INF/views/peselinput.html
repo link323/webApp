@@ -1,0 +1,23 @@
+<html>		
+		<div>
+			<h1>Type pacient's PESEL</h1>
+		    <form:form method="POST" modelAttribute="chosenPacient" class="form-horizontal">
+		    	<h2>total</h2>
+		        <div class="row">
+		            <div class="form-group col-md-12">
+		                <label class="col-md-3 control-lable" for="total">PESEL</label>
+		                <div class="col-md-7">
+		                    <form:input type="number" step="any" path="pesel" id="pesel" required = "true"/>
+		                </div>
+		            </div>
+		        </div>
+		
+
+				<div class="row">
+		            <div class="form-actions floatRight">
+		                <input type="submit" value="count" class="btn btn-primary btn-sm">
+		            </div>
+		        </div>
+		    </form:form>
+		</div>
+</html>
