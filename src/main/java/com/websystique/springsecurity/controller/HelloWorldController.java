@@ -81,6 +81,7 @@ public class HelloWorldController {
 		List<Pacients> pacientsList = new ArrayList<>();
 		List<DiabeticResults> diabeticResults = userService.findAllDiabeticResults();
 		List<DiabeticResults> onePacientDiabeticResults = new ArrayList<>();
+		String message = "";
 		for (DiabeticResults result : diabeticResults) {
 			if (result.getPesel().equals(chosenPacient.getPesel())) {
 				onePacientDiabeticResults.add(result);
@@ -97,12 +98,18 @@ public class HelloWorldController {
 		System.out.println(
 				"min: " + minResult + ", max: " + maxResult + ", mean: " + meanResult + ", median: " + medianResult);
 
+		CheckDiabetesRisk risk = new CheckDiabetesRisk(onePacientDiabeticResults);
+		String temp  = risk.callDroolsForPacient();
+		if(temp != null){
+			message = temp;
+		}
+		
 		model.addAttribute("diabeticResults", onePacientDiabeticResults);
 		model.addAttribute("min", minResult);
 		model.addAttribute("max", maxResult);
 		model.addAttribute("mean", meanResult);
 		model.addAttribute("median", medianResult);
-
+		model.addAttribute("message", message);
 		return "diabetic";
 	}
 
@@ -129,7 +136,7 @@ public class HelloWorldController {
 				onePacientPressureResults.add(result);
 			}
 		}
-
+		
 		Minimum min = new Minimum();
 		String minResult = min.countMinOfPressure(onePacientPressureResults);
 		Maximum max = new Maximum();
@@ -140,13 +147,20 @@ public class HelloWorldController {
 		String medianResult = median.countMedianOfPressure(onePacientPressureResults);
 		System.out.println(
 				"min: " + minResult + ", max: " + maxResult + ", mean: " + meanResult + ", median: " + medianResult);
-
+		
+		CheckHypertensionRisk risk = new CheckHypertensionRisk(onePacientPressureResults);
+		String temp  = risk.callDroolsForPacient();
+		String message = "";
+		if(temp != null){
+			message = temp;
+		}
 		model.addAttribute("pressureResults", onePacientPressureResults);
 		model.addAttribute("min", minResult);
 		model.addAttribute("max", maxResult);
 		model.addAttribute("mean", meanResult);
 		model.addAttribute("median", medianResult);
-
+		model.addAttribute("message", message);
+		
 		return "pressure";
 	}
 

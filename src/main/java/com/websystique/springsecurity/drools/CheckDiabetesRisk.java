@@ -15,6 +15,9 @@ public class CheckDiabetesRisk {
 		this.allPacientsDiabeticResults = diabeticResults;
 		this.pesel = pesel;
 	}
+	public CheckDiabetesRisk(List<DiabeticResults> diabeticResults) {
+		this.allPacientsDiabeticResults = diabeticResults;
+	}
 	public Glucose buildGlucoseObject(){
 		for(DiabeticResults result : allPacientsDiabeticResults){
 			if(result.getPesel() == pesel){
@@ -31,10 +34,34 @@ public class CheckDiabetesRisk {
 		return glucose;
 	}
 	
+	public Glucose buildGlucoseObjectForPacient(){
+		int sizeOfList = allPacientsDiabeticResults.size();
+		System.out.println("sizeOfList is "+ sizeOfList);
+		Glucose glucose = new Glucose(Integer.parseInt(allPacientsDiabeticResults.get(sizeOfList-1).getBeforeFood()),
+				Integer.parseInt(allPacientsDiabeticResults.get(sizeOfList-1).getResult()),
+				Integer.parseInt(allPacientsDiabeticResults.get(sizeOfList-2).getBeforeFood()),
+				Integer.parseInt(allPacientsDiabeticResults.get(sizeOfList-2).getResult()));
+		System.out.println(glucose.beforeFood1 + " " + glucose.getResult1());
+		System.out.println(glucose.beforeFood2 + " " + glucose.getResult2());
+		return glucose;
+	}
+	
 	public String callDrools(){
 		Glucose glucose = buildGlucoseObject();
 		Drools drools = new Drools(glucose);
-		drools.droolsGlucoseConfirmer();
-		return "";
+		String result = drools.droolsGlucoseConfirmer();
+		System.out.println("in callDrools "+result);
+		
+		return result;
+	}
+	
+	public String callDroolsForPacient(){
+		Glucose glucose = buildGlucoseObjectForPacient();
+		System.out.println("creating drools object");
+		Drools drools = new Drools(glucose);
+		String result = drools.droolsGlucoseConfirmer();
+		System.out.println("in callDrools "+result);
+		
+		return result;
 	}
 }

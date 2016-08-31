@@ -3,7 +3,8 @@ package com.websystique.springsecurity.drools;
 public class Blood {
 
 	private int skurczowe1, rozkurczowe1, skurczowe2, rozkurczowe2, skurczowe3, rozkurczowe3;
-	
+	String interpretation;
+
 	public Blood(int skurczowe1, int rozkurczowe1,int skurczowe2, int rozkurczowe2, int skurczowe3, int rozkurczowe3){
 		this.skurczowe1 = skurczowe1;
 		this.rozkurczowe1 = rozkurczowe1;
@@ -11,6 +12,9 @@ public class Blood {
 		this.rozkurczowe2 = rozkurczowe2;
 		this.skurczowe3 = skurczowe3;
 		this.rozkurczowe3 = rozkurczowe3;
+	}
+	public Blood(){
+		
 	}
 	
 	public int getSkurczowe1(){
@@ -38,4 +42,12 @@ public class Blood {
     public void display(String message){
     	System.out.println(message);
     }
+
+	public String getInterpretation(){
+		return interpretation;
+	}
+	
+	public void setInterpretation(String interpretation){
+		this.interpretation = interpretation;
+	}
 }

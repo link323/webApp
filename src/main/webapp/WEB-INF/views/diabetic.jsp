@@ -55,6 +55,7 @@
 			</div>
 		</form:form>
 	</div>
+	<h1>${message}</h1>
 	<div>
 		<h1>calculated statistics</h1>
 		<table>
@@ -76,9 +77,9 @@
 			</tr>
 		</table>
 	</div>
-
 	<div id="curve_chart" style="width: 900px; height: 500px"></div>
-
+	
+	<h1>${message}</h1>
 	<h2>List of glucose results</h2>
 	<div class="tbl-header">
 		<table cellpadding="0" cellspacing="0" border="0">

@@ -3,6 +3,7 @@ package com.drools;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.websystique.springsecurity.drools.CheckDiabetesRisk;
@@ -18,7 +19,7 @@ public class CheckDiabetesRiskTest {
 		diabeticResults.add(new DiabeticResults("1","90032511780", "210", "", "1", ""));
 		diabeticResults.add(new DiabeticResults("1","90032511777", "200", "", "1", ""));
 		CheckDiabetesRisk risk = new CheckDiabetesRisk(diabeticResults, pesel);
-		risk.callDrools();
+		System.out.println("in checkIfDiabetesTestReturnTrue "+risk.callDrools());
 	}
 	@Test
 	public void checkIfDiabetesTestReturnFalse() {

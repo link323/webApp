@@ -9,7 +9,6 @@ import org.kie.api.runtime.KieSession;
  */
 public class Drools {
     
-	private String result;
     private Blood bloodPressure;
     private Glucose glucose;
     
@@ -19,12 +18,6 @@ public class Drools {
     
     public Drools(Glucose glucose) {
         this.glucose = glucose;
-    }
-    public String getResult(){
-    	return result;
-    }
-    public void setResult(String s){
-    	this.result = s;
     }
     
     public String droolsBloodPressureConfirmer(){
@@ -36,10 +29,11 @@ public class Drools {
         	kSession.insert(bloodPressure);
         	kSession.fireAllRules();
 
+        	System.out.println("in droolsGlucoseConfirmer "+bloodPressure.getInterpretation());
         } catch (Throwable t) {
             t.printStackTrace();
         }
-		return "kot";
+		return bloodPressure.getInterpretation();
     }
     
     public String droolsGlucoseConfirmer(){
@@ -49,11 +43,16 @@ public class Drools {
             KieContainer kContainer = ks.getKieClasspathContainer();
             KieSession kSession = kContainer.newKieSession("ksession-rules");
         	kSession.insert(glucose);
+        	
+        	System.out.println(glucose.getInterpretation());
+
         	kSession.fireAllRules();
+        	
+        	System.out.println("in droolsGlucoseConfirmer "+glucose.getInterpretation());
 
         } catch (Throwable t) {
             t.printStackTrace();
         }
-		return "kot";
+		return glucose.getInterpretation();
     }
 }

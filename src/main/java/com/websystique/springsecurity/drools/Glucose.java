@@ -3,11 +3,15 @@ package com.websystique.springsecurity.drools;
 public class Glucose {
 
 	int beforeFood1, result1, beforeFood2, result2;
+	String interpretation;
 	public Glucose(int beforeFood1, int result1, int beforeFood2, int result2){
 		this.beforeFood1 = beforeFood1;
 		this.beforeFood2 = beforeFood2;
 		this.result1 = result1;
 		this.result2 = result2;
+	}
+	public Glucose(){
+
 	}
 	
 	public int getBeforeFood1(){
@@ -24,5 +28,13 @@ public class Glucose {
 	
 	public int getResult2(){
 		return result2;
+	}
+	
+	public String getInterpretation(){
+		return interpretation;
+	}
+	
+	public void setInterpretation(String interpretation){
+		this.interpretation = interpretation;
 	}
 }

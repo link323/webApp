@@ -15,6 +15,9 @@ public class CheckHypertensionRisk {
 		this.allPacientsPressureResults = diabeticResults;
 		this.pesel = pesel;
 	}
+	public CheckHypertensionRisk(List<PressureResults> diabeticResults) {
+		this.allPacientsPressureResults = diabeticResults;
+	}
 	public Blood buildBloodPressureObject(){
 		for(PressureResults result : allPacientsPressureResults){
 			if(result.getPesel() == pesel){
@@ -32,11 +35,31 @@ public class CheckHypertensionRisk {
 		
 		return pressure;
 	}
+	public Blood buildBloodPressureObjectForPacient(){
+
+		int sizeOfList = allPacientsPressureResults.size();
+		
+		Blood pressure = new Blood(Integer.parseInt(allPacientsPressureResults.get(sizeOfList-1).getSystolic()),
+				Integer.parseInt(allPacientsPressureResults.get(sizeOfList-1).getDiastolic()),
+				Integer.parseInt(allPacientsPressureResults.get(sizeOfList-2).getSystolic()),
+				Integer.parseInt(allPacientsPressureResults.get(sizeOfList-2).getDiastolic()),
+				Integer.parseInt(allPacientsPressureResults.get(sizeOfList-3).getSystolic()),
+				Integer.parseInt(allPacientsPressureResults.get(sizeOfList-3).getDiastolic()));
+		
+		return pressure;
+	}
 	
 	public String callDrools(){
 		Blood pressure = buildBloodPressureObject();
 		Drools drools = new Drools(pressure);
-		drools.droolsBloodPressureConfirmer();
-		return "";
+		String result = drools.droolsBloodPressureConfirmer();
+		return result;
+	}
+	
+	public String callDroolsForPacient(){
+		Blood pressure = buildBloodPressureObjectForPacient();
+		Drools drools = new Drools(pressure);
+		String result = drools.droolsBloodPressureConfirmer();
+		return result;
 	}
 }
