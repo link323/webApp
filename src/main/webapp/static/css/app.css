@@ -38,6 +38,8 @@ body, #mainWrapper, .form-control{
     border-radius: 5px;
     box-shadow: 3px 3px 10px #333;
     padding: 15px;
+    text-align: center;
+    display: inline-block;
 }
 
 .login-container {
@@ -58,7 +60,7 @@ body, #mainWrapper, .form-control{
 
 body {
   padding : 10px ;
-  
+  text-align: center;
 }
 
 #exTab1 .tab-content {

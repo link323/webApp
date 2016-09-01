@@ -5,7 +5,11 @@ function drawChart(title, resultName, divName){
 				var options = {
 						title: title,
 						curveType: 'function',
-						legend: { position: 'bottom' }
+						hAxis: { minValue: 1, maxValue: parseInt(document.getElementById("numberOfResults").value) },
+						pointSize: 7,
+						dataOpacity: 0.3,
+						legend: { position: 'bottom' 
+							}
 				};
 //				var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 				console.log($('#'+divName)[0]);
